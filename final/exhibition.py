@@ -1,9 +1,9 @@
 from flask import Flask, render_template, jsonify, request
 app = Flask(__name__)
 
-from pymongo import MongoClient           # pymongo를 임포트 하기(패키지 인스톨 먼저 해야겠죠?)
-client = MongoClient('localhost', 27017)  # mongoDB는 27017 포트로 돌아갑니다.
-db = client.dblogin                  # 'dbsparta'라는 이름의 db를 만듭니다.
+from pymongo import MongoClient           
+client = MongoClient('localhost', 27017)  
+db = client.dblogin                 
 
 
 db.users.insert_one({'id':'mijung','password':8548})
@@ -42,14 +42,14 @@ def local():
 ## API 역할을 하는 부분
 @app.route('/post', methods=['POST'])
 def post():
-   global articles               # 이 함수 안에서 나오는 articles 글로벌 변수를 가리킵니다.
+   global articles               
 
-   id_receive = request.form['id_give']          # 클라이언트로부터 url을 받는 부분
-   password_receive = request.form['password_give']  # 클라이언트로부터 comment를 받는 부분
+   id_receive = request.form['id_give']         
+   password_receive = request.form['password_give']  
 
-   article = {'id':id_receive,'password':password_receive} # 받은 걸 딕셔너리로 만들고,
+   article = {'id':id_receive,'password':password_receive} 
 
-   articles.append(article)   # 넣는다
+   articles.append(article)  
 
    return jsonify({'result':'success'})
 
@@ -61,7 +61,7 @@ def view():
 # # 데이터 입력
 @app.route('/push', methods=['POST'])
 def push():
-   global informations        # information 
+   global informations       
    global num
    x_receive = request.form['x_give']
    y_receive = request.form['y_give']
